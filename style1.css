@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Flexbox */
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.h-center {
+    justify-content: center;
+}
+
+.h-between {
+    justify-content: space-between;
+}
+
+.h-end {
+    justify-content: flex-end;
+}
+
+.v-center {
+    align-items: center;
+}
+
+/* Buttons */
+button {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--white-3);
+}
+
+/* Inputs */
+input {
+    border: 2px solid var(--white);
+    border-radius: 10px;
+    padding: 0 10px;
+    background: transparent;
+    font-size: 15px;
+    height: 41px;
+    color: var(--white);
+}
+
+input:focus {
+    outline: none;
+}
+
+/* Color */
+
+:root {
+    --white: #FFFFFF;
+    --white-3: #FFFFFF30;
+}

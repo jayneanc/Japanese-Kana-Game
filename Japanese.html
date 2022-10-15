@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="japanese, game, hiragana, katagana">
+    <meta name="title" content="Learn Japanese">
+    <meta name="author" content="Jay-Nean Chen">
+    <!-- Style -->
+    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+    <div class="page">
+        <div class="flex h-end v-center content">
+            <div id="game-start" class="flex-column v-center text-content">
+                <p>Please choose type of lessons:</p>
+                <div class="flex h-between options">
+                    <button onClick="getType(1)">Hiragana</button>
+                    <button onClick="getType(2)">Katagana</button>
+                </div>
+            </div>
+            <div id="game-play" class="flex-column h-center text-content">
+                <div id="game-question" class="flex-column v-center">
+                    <a>How to pronounce this?</a>
+                    <a id="game-char"></a>
+                    <div class="flex h-center">
+                        <input id="game-input" type="text" autofocus />
+                        <button id="game-submit" onClick="getAnswer()">Submit</button>
+                    </div>
+                </div>
+                <div id="game-answer" class="flex-column v-center">
+                    <p></p>
+                    <p></p>
+                    <button id="game-next" onClick="getNextQuestion()"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Script -->
+    <script src="Characters.js"></script>
+    <script src="Japanese.js"></script>
+</body>
+
+</html>

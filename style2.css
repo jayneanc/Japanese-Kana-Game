@@ -1,0 +1,62 @@
+.page {
+    height: 100vh;
+}
+
+.page:after {
+    content: "";
+    background-image: url("background.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.9;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.content {
+    width: 100vw;
+    height: 100vh;
+}
+
+.text-content {
+    width: 45vw;
+    font-size: 30px;
+}
+
+#game-start .options {
+    width: 40%;
+}
+
+#game-play {
+    display: none;
+}
+
+#game-play a {
+    margin: 10px 0;
+}
+
+#game-play button {
+    font-size: 18px;
+    margin-left: 10px;
+    padding: 8px 10px;
+}
+
+#game-question div {
+    margin-top: 10px;
+}
+
+#game-answer p {
+    margin: 10px 0;
+}
+
+#game-answer button {
+    margin-top: 15px;
+}
+
+#game-question,
+#game-answer {
+    display: none;
+}
