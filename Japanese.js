@@ -1,10 +1,13 @@
-var chars = null;
-var ans = null;
+var charsAll = [];
+var chars = [];
+var ans = {};
 var wrong = [];
 var total = 0;
 var count = 0;
 const elmntStart = document.getElementById("game-start");
 const elmntPlay = document.getElementById("game-play");
+const elmntAllChars = document.getElementById("game-all-chars");
+const elmntAllCharsCol = elmntAllChars.getElementsByTagName("div");
 const elmntChar = document.getElementById("game-char");
 const elmntQuestion = document.getElementById("game-question");
 const elmntAnswer = document.getElementById("game-answer");
@@ -27,16 +30,27 @@ document.addEventListener("keypress", function (event) {
 });
 
 function getType(type) {
-  chars = type === 1 ? [...hiragana] : [...katagana];
+  // Get char list
+  charsAll = type === 1 ? [...hiragana] : [...katagana];
+  charsAll.forEach((elmnt) => {
+    if (elmnt.kana !== "") {
+      chars.push(elmnt);
+    }
+  });
+
+  // Count
   count = 0;
   total = chars.length;
+
+  // DOM
+  getResult();
   gamePlay("start");
 }
 
 function gamePlay(status) {
   if (status === "start") {
     elmntStart.style.display = "none";
-    elmntPlay.style.display = "block";
+    elmntPlay.style.display = "flex";
     getRandomChar();
   } else if (status === "restart") {
     chars = wrong;
@@ -77,6 +91,17 @@ function getAnswer() {
   // Record wrong answer
   if (value !== ans.roman) {
     wrong.push(ans);
+  } else {
+    // Special case: n & (pause)
+    if (ans.index === 112 || ans.index === 113) {
+      const texts = elmntAllCharsCol[elmntAllCharsCol.length - (114 - ans.index)].getElementsByTagName("a");
+      texts[1].innerHTML = ans.kana;
+    } else {
+      const row = Math.floor(ans.index / 8);
+      const texts =
+        elmntAllCharsCol[(ans.index % 8) + 1].getElementsByTagName("a");
+      texts[row + 1].innerHTML = ans.kana;
+    }
   }
 
   // DOM
@@ -98,6 +123,29 @@ function getNextQuestion() {
       gamePlay("restart");
     } else {
       gamePlay("end");
+    }
+  }
+}
+
+function getResult() {
+  for (let i = 1; i < elmntAllCharsCol.length; i++) {
+    const texts = elmntAllCharsCol[i].getElementsByTagName("a");
+
+    for (let j = 1; j < texts.length; j++) {
+      const index = i - 1 + (j - 1) * 8;
+
+      if (
+        ((i === elmntAllCharsCol.length - 1 ||
+          i === elmntAllCharsCol.length - 2) &&
+          j !== 1) ||
+        charsAll[index].roman.length === 0
+      ) {
+        texts[j].innerHTML = "X";
+        texts[j].style.color = "var(--white-8)";
+      }
+      else {
+        texts[j].innerHTML = "";
+      }
     }
   }
 }
