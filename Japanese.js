@@ -1,9 +1,13 @@
+// Variables
+const prev = {};
 var charsAll = [];
 var chars = [];
-var ans = {};
 var wrong = [];
+var ans = {};
 var total = 0;
 var count = 0;
+
+// Elements
 const elmntStart = document.getElementById("game-start");
 const elmntPlay = document.getElementById("game-play");
 const elmntAllChars = document.getElementById("game-all-chars");
@@ -88,19 +92,34 @@ function getAnswer() {
   // Get answer
   const value = elementInput.value;
 
+  // Update previous correct answer color
+  if (prev.row) {
+    const texts = elmntAllCharsCol[prev.row].getElementsByTagName("a");
+    texts[prev.col].style.color = "var(--white)";
+  }
+
   // Record wrong answer
   if (value !== ans.roman) {
     wrong.push(ans);
   } else {
-    // Special case: n & (pause)
     if (ans.index === 112 || ans.index === 113) {
-      const texts = elmntAllCharsCol[elmntAllCharsCol.length - (114 - ans.index)].getElementsByTagName("a");
+      // Special case: n & (pause)
+      const texts =
+        elmntAllCharsCol[
+          elmntAllCharsCol.length - (114 - ans.index)
+        ].getElementsByTagName("a");
       texts[1].innerHTML = ans.kana;
+      texts[1].style.color = "var(--red)";
+      prev.row = elmntAllCharsCol.length - (114 - ans.index);
+      prev.col = 1;
     } else {
       const row = Math.floor(ans.index / 8);
       const texts =
         elmntAllCharsCol[(ans.index % 8) + 1].getElementsByTagName("a");
       texts[row + 1].innerHTML = ans.kana;
+      texts[row + 1].style.color = "var(--red)";
+      prev.row = (ans.index % 8) + 1;
+      prev.col = row + 1;
     }
   }
 
@@ -142,8 +161,7 @@ function getResult() {
       ) {
         texts[j].innerHTML = "X";
         texts[j].style.color = "var(--white-8)";
-      }
-      else {
+      } else {
         texts[j].innerHTML = "";
       }
     }

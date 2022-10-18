@@ -61,10 +61,10 @@ input:focus {
 }
 
 /* Color */
-
 :root {
     --white: #FFFFFF;
     --white-8: #FFFFFF80;
     --black-8: #00000080;
     --black-5: #00000050;
+    --red: #FF8888;
 }
